@@ -9,7 +9,7 @@ output= ' '.join(format(ord(x), '08b') for x in file_content) #This converts the
 myfileStringBinary = output.replace(" ", "")
 
 def remainder(inputString, divisor):
-    paddedArray = list(inputString + '0'*3)
+    paddedArray = list(inputString + '0'*len(crc_32))
     while '1' in paddedArray[:len(inputString)]:
         latestOne = paddedArray.index('1')
         for i in range(0, len(divisor)):
@@ -67,11 +67,3 @@ for i in range(0,len(myfileStringBinary),400):
     finalFrameString = frameString + remainder(frameString, crc_32)
     hello = hello + assignment1(finalFrameString)
 print (hello)
-
-
-
-# hello = "11010011101100" + remainder("11010011101100","1011") #CRC
-
-
-
-
