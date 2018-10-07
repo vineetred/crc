@@ -10,16 +10,19 @@ myfileStringBinary = output.replace(" ", "")
 
 #Polynomial division
 def remainder(inputString, divisor):
-    crcAdded = list(inputString + '0'*len(crc_32))
-    while '1' in crcAdded[:len(inputString)]:
+    crcAdded = list(inputString)
+    crcAdded = crcAdded + list('0'*len(crc_32))
+    lenInput = len(inputString)
+    lenDivisor = len(divisor)
+    while '1' in crcAdded[:lenInput]:
         latestOne = findOne(crcAdded)
-        for i in range(0, len(divisor)):
+        for i in range(0, lenDivisor):
             if (divisor[i] == crcAdded[latestOne + i]):
                 crcAdded[latestOne + i] = '0'
             else:
                 crcAdded[latestOne + i] = '1'
 
-    heyhey = ''.join(crcAdded)[len(inputString):]
+    heyhey = ''.join(crcAdded)[lenInput:]
     return heyhey
 
 def findOne(strrr):
