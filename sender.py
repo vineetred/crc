@@ -8,18 +8,22 @@ file_content= text.read()
 output= ' '.join(format(ord(x), '08b') for x in file_content) #This converts the
 myfileStringBinary = output.replace(" ", "")
 
+#Polynomial division
 def remainder(inputString, divisor):
-    paddedArray = list(inputString + '0'*len(crc_32))
-    while '1' in paddedArray[:len(inputString)]:
-        latestOne = paddedArray.index('1')
+    crcAdded = list(inputString + '0'*len(crc_32))
+    while '1' in crcAdded[:len(inputString)]:
+        latestOne = findOne(crcAdded)
         for i in range(0, len(divisor)):
-            if divisor[i] == paddedArray[latestOne + i]:
-                paddedArray[latestOne + i] = '0'
+            if (divisor[i] == crcAdded[latestOne + i]):
+                crcAdded[latestOne + i] = '0'
             else:
-                paddedArray[latestOne + i] = '1'
+                crcAdded[latestOne + i] = '1'
 
-    heyhey = ''.join(paddedArray)[len(inputString):]
+    heyhey = ''.join(crcAdded)[len(inputString):]
     return heyhey
+
+def findOne(strrr):
+    return strrr.index('1')
 
 def assignment1(crcPadded):
     finalString = crcPadded
@@ -67,3 +71,6 @@ for i in range(0,len(myfileStringBinary),400):
     finalFrameString = frameString + remainder(frameString, crc_32)
     hello = hello + assignment1(finalFrameString)
 print (hello)
+
+out = open('f_send.txt', 'w')
+out.write(hello)
