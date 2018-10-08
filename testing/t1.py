@@ -1,4 +1,5 @@
 crc_32 = "100000100110000010001110110110111"
+
 #Opening the file
 text = open('input.txt')
 file_content= text.read()
@@ -22,7 +23,6 @@ def remainder(inputString, divisor):
                 crcAdded[latestOne + i] = '1'
 
     heyhey = ''.join(crcAdded)[lenInput:]
-    print("Heyhey: ",heyhey)
     return heyhey
 
 def findOne(strrr):
@@ -40,13 +40,8 @@ def assignment1(crcPadded):
         standardOutput = bit #loading each bit into the the var
         
         if(count == 5):
-            if(standardOutput=='1'):
-                count = 1
-                stuffedOutput = stuffedOutput + '0' + standardOutput #Putting an end to consecutive 1s
-                
-            elif(standardOutput == '0'):
-                count = 0
-                stuffedOutput = stuffedOutput + '0' + standardOutput
+            count = 1
+            stuffedOutput = stuffedOutput + '0' + standardOutput #Putting an end to consecutive 1s
 
         elif(count<=4):
             if(standardOutput == '1'):
@@ -62,6 +57,14 @@ def assignment1(crcPadded):
 
     stuffedOutput = seperate + stuffedOutput #Adding the flag to the first frame
     return stuffedOutput
+
+#Opening the file
+text = open('input.txt')
+file_content= text.read()
+
+#Converting to binary
+output= ' '.join(format(ord(x), '08b') for x in file_content) #This converts the
+myfileStringBinary = output.replace(" ", "")
 
 
 hello = ""
